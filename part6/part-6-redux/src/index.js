@@ -2,12 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { Provider } from "react-redux";
-import { createStore, combineReducers } from "redux";
+// import { createStore, combineReducers } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 
 import App from "./App";
-import noteReducer from "./reducers/noteReducer";
+import noteReducer, {
+  createNote,
+  toggleImportanceOf,
+} from "./reducers/noteReducer";
 import filterReducer from "./reducers/filterReducer";
-import { createNote } from "./reducers/noteReducer";
+// import { createNote } from "./reducers/noteReducer";
 import { filterChange } from "./reducers/filterReducer";
 
 // const counterReducer = (state = 0, action) => {
@@ -57,18 +61,22 @@ import { filterChange } from "./reducers/filterReducer";
 //   );
 // };
 
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  },
 });
 
-const store = createStore(reducer);
+// const store = createStore(reducer);
+console.log(store.getState());
 
 store.subscribe(() => console.log(store.getState()));
 store.dispatch(filterChange("ALL"));
 store.dispatch(
   createNote("combineReducers forms one reducer from many simple reducers")
 );
+store.dispatch(toggleImportanceOf(2));
 
 // store.dispatch({
 //   type: "NEW_NOTE",
