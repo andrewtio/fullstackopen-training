@@ -6,13 +6,16 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 import App from "./App";
-import noteReducer, {
-  createNote,
-  toggleImportanceOf,
-} from "./reducers/noteReducer";
+// import noteReducer, {
+//   createNote,
+//   toggleImportanceOf,
+//   setNotes,
+// } from "./reducers/noteReducer";
+import noteReducer from "./reducers/noteReducer";
 import filterReducer from "./reducers/filterReducer";
 // import { createNote } from "./reducers/noteReducer";
-import { filterChange } from "./reducers/filterReducer";
+// import { filterChange } from "./reducers/filterReducer";
+// import noteService from "./services/notes";
 
 // const counterReducer = (state = 0, action) => {
 // if (action.type === "INCREMENT") {
@@ -68,15 +71,21 @@ const store = configureStore({
   },
 });
 
+// noteService.getAll().then((notes) =>
+//   notes.forEach((note) => {
+//     store.dispatch(setNotes(note));
+//   })
+// );
+
 // const store = createStore(reducer);
 console.log(store.getState());
 
 store.subscribe(() => console.log(store.getState()));
-store.dispatch(filterChange("ALL"));
-store.dispatch(
-  createNote("combineReducers forms one reducer from many simple reducers")
-);
-store.dispatch(toggleImportanceOf(2));
+// store.dispatch(filterChange("ALL"));
+// store.dispatch(
+//   createNote("combineReducers forms one reducer from many simple reducers")
+// );
+// store.dispatch(toggleImportanceOf(2));
 
 // store.dispatch({
 //   type: "NEW_NOTE",

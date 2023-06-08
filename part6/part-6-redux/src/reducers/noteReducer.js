@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [
-  {
-    content: "reducer defines how redux store works",
-    important: true,
-    id: 1,
-  },
-  {
-    content: "state of store can contain any data",
-    important: false,
-    id: 2,
-  },
-];
+// const initialState = [
+//   {
+//     content: "reducer defines how redux store works",
+//     important: true,
+//     id: 1,
+//   },
+//   {
+//     content: "state of store can contain any data",
+//     important: false,
+//     id: 2,
+//   },
+// ];
 
 // const noteReducer = (state = initialState, action) => {
 //   // if (action.type === "NEW_NOTE") {
@@ -44,16 +44,18 @@ const generateId = () => Number((Math.random() * 1000000).toFixed(0));
 
 const noteSlice = createSlice({
   name: "notes",
-  initialState,
+  initialState: [],
   reducers: {
     createNote(state, action) {
-      const content = action.payload;
+      // const content = action.payload;
 
-      state.push({
-        content,
-        important: false,
-        id: generateId(),
-      });
+      // state.push({
+      //   content,
+      //   important: false,
+      //   id: generateId(),
+      // });
+      const newNote = action.payload;
+      state.push(newNote);
     },
     toggleImportanceOf(state, action) {
       const id = action.payload;
@@ -65,6 +67,12 @@ const noteSlice = createSlice({
       console.log("ParsedState", JSON.parse(JSON.stringify(state)));
       console.log("state", state);
       return state.map((note) => (note.id !== id ? note : changedNote));
+    },
+    appendNote(state, action) {
+      state.push(action.payload);
+    },
+    setNotes(state, action) {
+      return action.payload;
     },
   },
 });
@@ -87,7 +95,8 @@ const noteSlice = createSlice({
 //   };
 // };
 
-export const { createNote, toggleImportanceOf } = noteSlice.actions;
+export const { createNote, toggleImportanceOf, appendNote, setNotes } =
+  noteSlice.actions;
 export default noteSlice.reducer;
 
 // export default noteReducer;
