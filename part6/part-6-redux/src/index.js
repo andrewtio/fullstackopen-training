@@ -3,16 +3,16 @@ import ReactDOM from "react-dom/client";
 
 import { Provider } from "react-redux";
 // import { createStore, combineReducers } from "redux";
-import { configureStore } from "@reduxjs/toolkit";
-
+// import { configureStore } from "@reduxjs/toolkit";
+import store from "./store";
 import App from "./App";
 // import noteReducer, {
 //   createNote,
 //   toggleImportanceOf,
 //   setNotes,
 // } from "./reducers/noteReducer";
-import noteReducer from "./reducers/noteReducer";
-import filterReducer from "./reducers/filterReducer";
+// import noteReducer from "./reducers/noteReducer";
+// import filterReducer from "./reducers/filterReducer";
 // import { createNote } from "./reducers/noteReducer";
 // import { filterChange } from "./reducers/filterReducer";
 // import noteService from "./services/notes";
@@ -64,12 +64,12 @@ import filterReducer from "./reducers/filterReducer";
 //   );
 // };
 
-const store = configureStore({
-  reducer: {
-    notes: noteReducer,
-    filter: filterReducer,
-  },
-});
+// const store = configureStore({
+//   reducer: {
+//     notes: noteReducer,
+//     filter: filterReducer,
+//   },
+// });
 
 // noteService.getAll().then((notes) =>
 //   notes.forEach((note) => {
