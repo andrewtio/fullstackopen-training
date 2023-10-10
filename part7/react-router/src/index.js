@@ -232,7 +232,6 @@ const App = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
       <Routes>
         <Route path="/notes/:id" element={<Note note={note} />} />
         <Route path="/notes" element={<Notes notes={notes} />} />
@@ -243,7 +242,6 @@ const App = () => {
         <Route path="/login" element={<Login onLogin={login} />} />
         <Route path="/" element={<Home />} />
       </Routes>
-
       <footer>
         <br />
         <em>Note app, Departement of Computer Science 2023</em>
