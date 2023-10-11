@@ -10,7 +10,58 @@ import {
   useNavigate,
   useMatch,
 } from "react-router-dom";
-import { Table, Form, Button, Alert, Navbar, Nav } from "react-bootstrap";
+import {
+  Table,
+  Form,
+  // Button,
+  // Alert,
+  Navbar,
+  Nav,
+} from "react-bootstrap";
+import {
+  Container,
+  TableContainer,
+  Paper,
+  TableBody,
+  TableRow,
+  TableCell,
+  TextField,
+  Button,
+  Alert,
+  AppBar,
+  Toolbar,
+  IconButton,
+} from "@mui/material";
+import styled from "styled-components";
+
+const StyledButton = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid Chocolate;
+  border-radius: 3px;
+`;
+
+const Input = styled.input`
+  margin: 0.25em;
+`;
+
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`;
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`;
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`;
 
 const Home = () => (
   <div>
@@ -46,7 +97,7 @@ const Note = ({ note }) => {
 const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
-    <Table striped>
+    {/* <Table striped>
       <tbody>
         {notes.map((note) => (
           <tr key={note.id}>
@@ -57,7 +108,22 @@ const Notes = ({ notes }) => (
           </tr>
         ))}
       </tbody>
-    </Table>
+    </Table> */}
+
+    <TableContainer component={Paper}>
+      <Table>
+        <TableBody>
+          {notes.map((note) => (
+            <TableRow key={note.id}>
+              <TableCell>
+                <Link to={`/notes/${note.id}`}>{note.content}</Link>
+              </TableCell>
+              <TableCell>{note.user}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   </div>
 );
 
@@ -91,7 +157,9 @@ const Login = (props) => {
         </div>
         <button type="submit">login</button>
       </form> */}
-      <Form onSubmit={onSubmit}>
+
+      {/* Bootstrap */}
+      {/* <Form onSubmit={onSubmit}>
         <Form.Group>
           <Form.Label>username:</Form.Label>
           <Form.Control type="text" name="username" />
@@ -101,7 +169,24 @@ const Login = (props) => {
             login
           </Button>
         </Form.Group>
-      </Form>
+      </Form> */}
+
+      <form onSubmit={onSubmit}>
+        <div>
+          {/* <TextField label="username" type="password"/> */}
+          username: <Input />
+        </div>
+        <div>
+          {/* <TextField label="password" type="password" /> */}
+          password: <Input type="password" />
+        </div>
+        <div>
+          {/* <Button variant="contained" color="primary" type="submit"> */}
+          <StyledButton type="submit" primary="">
+            login
+          </StyledButton>
+        </div>
+      </form>
     </div>
   );
 };
@@ -181,8 +266,16 @@ const App = () => {
 
     //   {content()}
     // </div>
-    <div className="container">
-      {message && <Alert variant="success">{message}</Alert>}
+    // <div className="container">
+    <Container>
+      {message && (
+        <Alert
+          // variant="success"
+          severity="success"
+        >
+          {message}
+        </Alert>
+      )}
       {/* <div>
         <Link style={padding} to="/">
           home
@@ -201,7 +294,9 @@ const App = () => {
           </Link>
         )}
       </div> */}
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+
+      {/* Bootstrap */}
+      {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
@@ -231,7 +326,39 @@ const App = () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar> */}
+      {/* <AppBar position="static"> */}
+      <Page>
+        <Navigation>
+          {/* <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+          ></IconButton> */}
+          <Button color="inherit" component={Link} to="/">
+            {/* <Link to="/">home</Link> */}
+            home
+          </Button>
+          <Button color="inherit" component={Link} to="/notes">
+            {/* <Link to="/notes">notes</Link> */}
+            notes
+          </Button>
+          <Button color="inherit" component={Link} to="/users">
+            {/* <Link to="/users">users</Link> */}
+            users
+          </Button>
+          {/* <Button color="inherit"> */}
+          {user ? (
+            <em>{user} logged in</em>
+          ) : (
+            <Button color="inherit" component={Link} to="/login">
+              login
+            </Button>
+          )}
+          {/* </Button> */}
+        </Navigation>
+        {/* </AppBar> */}
+      </Page>
       <Routes>
         <Route path="/notes/:id" element={<Note note={note} />} />
         <Route path="/notes" element={<Notes notes={notes} />} />
@@ -242,11 +369,11 @@ const App = () => {
         <Route path="/login" element={<Login onLogin={login} />} />
         <Route path="/" element={<Home />} />
       </Routes>
-      <footer>
+      <Footer>
         <br />
         <em>Note app, Departement of Computer Science 2023</em>
-      </footer>
-    </div>
+      </Footer>
+    </Container>
   );
 };
 
