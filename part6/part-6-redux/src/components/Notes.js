@@ -31,6 +31,7 @@ const Notes = (props) => {
   //     ? props.notes.filter((note) => note.important)
   //     : props.notes.filter((note) => !note.important);
   // };
+  console.log(props, "notesProps");
 
   return (
     <ul>
@@ -46,6 +47,7 @@ const Notes = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state, "state");
   if (state.filter === "ALL") {
     return {
       notes: state.notes,

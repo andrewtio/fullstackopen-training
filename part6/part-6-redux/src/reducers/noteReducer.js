@@ -102,6 +102,7 @@ export const initializeNotes = () => {
   return async (dispatch) => {
     const notes = await noteService.getAll();
     dispatch(setNotes(notes));
+    console.log(notes, "initializeNotes");
   };
 };
 
